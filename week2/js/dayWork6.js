@@ -1,5 +1,5 @@
 /*
-### 題目
+題目
 以下題目請合併為一份 CodePen 繳交，並透過「註解」進行回答。
 看完此文章「[比較運算子]
 (https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Expressions_and_Operators#%E6%AF%94%E8%BC%83%E9%81%8B%E7%AE%97%E5%AD%90)」的部分，
