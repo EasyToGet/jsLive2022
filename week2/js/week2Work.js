@@ -276,7 +276,7 @@ console.log(`小明總共需支付 ${mingBill} 帳單`);
 let playerA = '剪刀';
 let playerB = '剪刀';
 
-if (playerA === '剪刀' && playerB === '剪刀' || playerA === '石頭' && playerB === '石頭' || playerA === '布' && playerB === '布') {
+if (playerA === playerB) {
   console.log('平手');
 } else if (playerA === '剪刀' && playerB === '布' || playerA === '布' && playerB === '石頭' || playerA === '石頭' && playerB === '剪刀') {
   console.log('playerA 贏');
