@@ -332,12 +332,12 @@ let salaryData = {
 }
 // 第一位員工加薪邏輯
 if (salaryData.staff[0].salary < 40000) {
-  salaryData.staff[0].salary += 8000;
+  salaryData.staff[0].salary += 40000 - salaryData.staff[0].salary;
 }
 console.log("Bob 加薪到:", salaryData.staff[0].salary);
 
 if (salaryData.staff[1].salary < 40000) {
-  salaryData.staff[1].salary += 12000;
+  salaryData.staff[1].salary += 40000 - salaryData.staff[1].salary;
 }
 console.log("Jack 加薪到:", salaryData.staff[1].salary);
 
