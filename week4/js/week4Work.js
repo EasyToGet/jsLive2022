@@ -40,7 +40,7 @@ const addBmiData = (bmi, state) => {
 const printBmi = (height, weight) => {
   let bmi = (weight / (height / 100) ** 2).toFixed(2);
 
-  if (isNaN(bmi)) return console.log("您的數值輸入錯誤，請重新輸入");
+  if (isNaN(bmi) || bmi < 0) return console.log("您的數值輸入錯誤，請重新輸入");
   if (bmi < 18.5) addBmiData(bmi, "overThin");
   else if (18.5 <= bmi && bmi < 24) addBmiData(bmi, "normal");
   else if (24 <= bmi && bmi < 27) addBmiData(bmi, "overWeight");
