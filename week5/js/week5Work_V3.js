@@ -44,9 +44,16 @@ const ticketDescription = document.querySelector('#ticketDescription');
 const addBtn = document.querySelector('.addTicket-btn');
 const form = document.querySelector('.addTicket-form');
 
-const render = (data) => {
+const render = () => {
   let str = '';
-  data.forEach(item => {
+  const filterArea = data.filter(item => {
+    if (item.area === regionSearchFilter.value) {
+      return item;
+    } else if (regionSearchFilter.value === '地區搜尋' || !regionSearchFilter.value) {
+      return item;
+    }
+  });
+  filterArea.forEach(item => {
     str += `<li class="ticketCard">
         <div class="ticketCard-img">
           <a href="#">
@@ -78,26 +85,10 @@ const render = (data) => {
       </li>`;
   });
   areaList.innerHTML = str;
-  searchResult.innerHTML = `<p>本次搜尋共 ${data.length} 筆資料</p>`
+  searchResult.innerHTML = `<p>本次搜尋共 ${filterArea.length} 筆資料</p>`;
 };
 
-render(data);
-
-regionSearchFilter.addEventListener('change', (e) => {
-  e.preventDefault();
-  const target = e.target.value;
-  if (target === "") {
-    render(data);
-  } else {
-    let areaFilter = [];
-    data.forEach(item => {
-      if (target === item.area) {
-        areaFilter.push(item);
-      }
-    });
-    render(areaFilter);
-  }
-});
+render();
 
 addBtn.addEventListener('click', (e) =>{
   e.preventDefault();
@@ -120,5 +111,9 @@ addBtn.addEventListener('click', (e) =>{
     description: ticketDescription.value
   });
   form.reset();
-  render(data);
+  render();
+});
+
+regionSearchFilter.addEventListener('change', (e) => {
+  render();
 });

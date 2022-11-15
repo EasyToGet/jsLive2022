@@ -91,7 +91,7 @@ function renderData(area) {
       </li>`;
   });
   areaList.innerHTML = str;
-  searchResult.innerHTML = `<p>本次搜尋共 ${filterArea.length} 筆資料</p>`
+  searchResult.innerHTML = `<p>本次搜尋共 ${filterArea.length} 筆資料</p>`;
 };
 
 //  新增套票資料
@@ -119,6 +119,6 @@ function addData() {
 };
 
 //  選取地區
-regionSearchFilter.addEventListener('change', () => {
+regionSearchFilter.addEventListener('change', (e) => {
   renderData(regionSearchFilter.value);
 });

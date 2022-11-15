@@ -34,3 +34,4 @@
 - 第五週 主線任務: 期中試煉
   V1 - week5Work_V1: 原生寫法
   V2 - week5Work_V2: 關注點分離寫法
+  V3 - week5Work_V3: 使用 filter 語法優化 V1
