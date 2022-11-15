@@ -39,3 +39,4 @@
 - 11/01 每日任務 Day22：textContent
 - 11/02 每日任務 Day23：innerHTML
 - 11/03 每日任務 Day24：取得、設定元素屬性
+- 11/04 每日任務 Day25：forEach
