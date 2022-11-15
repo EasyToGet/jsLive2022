@@ -35,3 +35,4 @@
   V1 - week5Work_V1: 原生寫法
   V2 - week5Work_V2: 關注點分離寫法
   V3 - week5Work_V3: 使用 filter 語法優化 V1
+- 10/31 每日任務 Day21：DOM 選擇器
