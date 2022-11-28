@@ -43,3 +43,5 @@
 - 11/04 每日任務 Day25：forEach
 ## Week6 - AJAX 操控伺服器之術
 - 第六週 主線任務: AJAX 操控
+- 11/07 每日任務 Day26：addEventListener 事件監聽
+- 11/08 每日任務 Day27：表單取值觀念
