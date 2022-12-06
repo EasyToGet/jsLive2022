@@ -40,7 +40,7 @@ addBtn.addEventListener('click', (e) => {
     name: ticketName.value,
     imgUrl: ticketImgUrl.value,
     area: ticketRegion.value,
-    price: parseInt(ticketPrice.value),
+    price: parseInt(ticketPrice.value, 10),
     group: parseInt(ticketNum.value),
     rate: parseInt(ticketRate.value),
     description: ticketDescription.value
