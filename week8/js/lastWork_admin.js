@@ -6,18 +6,20 @@ const discardAllBtn = document.querySelector('.discardAllBtn');
 
 let orderData = [];
 
+const config = {
+  headers: {
+    'Authorization': token,
+  }
+};
+
 const init = () => {
   getOrderList();
 };
 
 //  取得訂單列表
 const getOrderList = () => {
-  axios.get(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`,
-    {
-      headers: {
-        'Authorization': token,
-      }
-    }).then(response => {
+  axios.get(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`, config)
+  .then(response => {
       orderData = response.data.orders;
       renderOrderList(orderData);
     }).catch(error => {
@@ -94,7 +96,7 @@ orderList.addEventListener('click', (e) => {
 //  修改訂單狀態
 const editOrderList = (status, id) => {
   let newStatus;
-  if (status === true) {
+  if (status === 'true') {
     newStatus = false;
   } else {
     newStatus = true;
@@ -105,12 +107,8 @@ const editOrderList = (status, id) => {
         "id": id,
         "paid": newStatus
       }
-    },
-    {
-      headers: {
-        'Authorization': token,
-      }
-    }).then(response => {
+    }, config)
+    .then(response => {
       alert('修改訂單成功');
       getOrderList();
     }).catch(error => {
@@ -120,12 +118,8 @@ const editOrderList = (status, id) => {
 
 //  刪除單筆訂單
 const deleteOrderItem = (orderId) => {
-  axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders/${orderId}`,
-    {
-      headers: {
-        'Authorization': token,
-      }
-    }).then(response => {
+  axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders/${orderId}`, config)
+  .then(response => {
       alert('刪除單筆訂單成功');
       getOrderList();
     }).catch(error => {
@@ -141,12 +135,8 @@ discardAllBtn.addEventListener('click', (e) => {
 
 //  刪除全部訂單
 const deleteAllOrder = () => {
-  axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`,
-    {
-      headers: {
-        'Authorization': token,
-      }
-    }).then(response => {
+  axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`, config)
+  .then(response => {
       alert('刪除全部訂單成功');
       getOrderList();
     }).catch(error => {

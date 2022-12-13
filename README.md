@@ -56,6 +56,7 @@
 - 11/17 每日任務 Day34：C3.js 使用練習
 - 11/18 每日任務 Day35：多筆物件取值
 ## Week8, Week9 - 最終關卡 DOM+API 操控
-- 第八週, 第九週 主線任務: 最終關卡 DOM+API 操控
-  * 前台 - week8_9Work_index: 購物商品
-  * 後台 -week8_9Work_admin: 訂單管理
+- 最後一週 主線任務: 最終關卡 DOM+API 操控
+  * 前台 - lastWork_index: 購物商品
+  * 後台 - lastWork_admin: 訂單管理
+- 11/21 每日任務 Day36：箭頭函式

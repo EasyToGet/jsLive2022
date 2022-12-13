@@ -1,5 +1,4 @@
 const api_path = 'edjslive2022';
-const token = 'py1iXUPOEoc3btkpIEiJCH9jfbT2';
 
 const productWrap = document.querySelector('.productWrap');
 const productSelect = document.querySelector('.productSelect');
@@ -70,6 +69,7 @@ const getCartList = () => {
       cartData = response.data.carts;
       renderCartList(cartData);
     }).catch(error => {
+      alert('購物車未有商品');
       console.log(error);
     })
 };
@@ -126,8 +126,11 @@ const addCartItem = (productId) => {
     }
   }).then(response => {
     alert("加入購物車成功");
-    getCartList();
+    console.log(response.data.carts);
+    cartData = response.data.carts;
+    renderCartList(cartData);
   }).catch(error => {
+    alert("加入購物車失敗");
     console.log(error);
   })
 };
