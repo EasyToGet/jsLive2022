@@ -60,3 +60,4 @@
   * 前台 - lastWork_index: 購物商品
   * 後台 - lastWork_admin: 訂單管理
 - 11/21 每日任務 Day36：箭頭函式
+- 11/22 每日任務 Day37：申請 API
