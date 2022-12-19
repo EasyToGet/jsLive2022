@@ -1,6 +1,6 @@
 /*
   題目: 
-  延續 Day 39 的每日任務，串接「送出購買訂單」API（如圖），練習實作「送出訂單」的功能
+  請同學實作「商品篩選」的功能，點擊 select 會呈現相對應類型的商品，如下圖
 */
 
 const baseUrl = 'https://livejs-api.hexschool.io';
@@ -9,23 +9,23 @@ const api_path = 'edjslive2022';
 const productList = document.querySelector('.productList');
 const cartList = document.querySelector('.cartList');
 
-let productsData;
+let productData = [];
 let cartData;
 
 const getProducts = () => {
   let url = `${baseUrl}/api/livejs/v1/customer/${api_path}/products`;
   axios.get(url)
     .then(response => {
-      productsData = response.data.products;
-      renderProduct(productsData);
+      productData = response.data.products;
+      renderProduct(productData);
     }).catch(error => {
       console.log(error);
     })
 };
 
-const renderProduct = (productsData) => {
+const renderProduct = (productData) => {
   let str = '';
-  productsData.forEach(item => {
+  productData.forEach(item => {
     str += `<div class="col-6 mb-3">
         <div class="card">
           <img src=${item.images} class="card-img-top productImg" alt="產品圖片">
@@ -91,6 +91,26 @@ const addCart = (id) => {
 
 getProducts();
 getCart();
+
+// 商品篩選功能
+const productSelect = document.querySelector('.productSelect');
+productSelect.addEventListener('change', selectFilter);
+
+function selectFilter(e) {
+  e.preventDefault();
+  let category = e.target.value;
+  if (category === '全部') {
+    renderProduct(productData);
+    return;
+  }
+  let targetProducts = [];
+  productData.forEach(item => {
+    if (item.category === category) {
+      targetProducts.push(item);
+    };
+  });
+  renderProduct(targetProducts);
+}
 
 //  送出訂單
 const addOrder = () => {
