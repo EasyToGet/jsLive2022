@@ -75,7 +75,7 @@ const renderCart = (cartData) => {
 };
 
 const addCart = (id) => {
-  url = `${baseUrl}/api/livejs/v1/customer/${api_path}/carts`;
+  let url = `${baseUrl}/api/livejs/v1/customer/${api_path}/carts`;
   let data = {
     "data": {
       "productId": id,

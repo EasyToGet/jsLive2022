@@ -1,6 +1,6 @@
 /*
   題目: 
-  延續 Day 39 的每日任務，串接「送出購買訂單」API（如圖），練習實作「送出訂單」的功能
+  請同學使用 這個模板 進行練習，嘗試實作購物車刪除功能，包含「刪除單一項目」以及「刪除全部項目」。
 */
 
 const baseUrl = 'https://livejs-api.hexschool.io';
@@ -9,23 +9,24 @@ const api_path = 'edjslive2022';
 const productList = document.querySelector('.productList');
 const cartList = document.querySelector('.cartList');
 
-let productsData;
+let productData = [];
 let cartData;
 
 const getProducts = () => {
   let url = `${baseUrl}/api/livejs/v1/customer/${api_path}/products`;
   axios.get(url)
     .then(response => {
-      productsData = response.data.products;
-      renderProduct(productsData);
+      productData = response.data.products;
+      renderProduct(productData);
+      getCategories();
     }).catch(error => {
       console.log(error);
     })
 };
 
-const renderProduct = (productsData) => {
+const renderProduct = (productData) => {
   let str = '';
-  productsData.forEach(item => {
+  productData.forEach(item => {
     str += `<div class="col-6 mb-3">
         <div class="card">
           <img src=${item.images} class="card-img-top productImg" alt="產品圖片">
@@ -67,9 +68,17 @@ const renderCart = (cartData) => {
     str += `<li>
         <p>名稱: <span>${item.product.title}</span></p>
         <p>數量: <span>${item.quantity}</span></p>
+        <button type="button" class="btn btn-primary mb-3 delSingleBtn" data-id="${item.id}">刪除</button>
       </li>`
   });
   cartList.innerHTML = str;
+  let delSingleBtn = document.querySelectorAll('.delSingleBtn');
+  delSingleBtn.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      delSingleCart(e.target.dataset.id);
+    });
+  });
 };
 
 const addCart = (id) => {
@@ -89,8 +98,80 @@ const addCart = (id) => {
     })
 };
 
+//  刪除單筆購物車資料
+const delSingleCart = (id) => {
+  let url = `${baseUrl}/api/livejs/v1/customer/${api_path}/carts/${id}`;
+  axios.delete(url)
+    .then(response => {
+      console.log(response);
+      getCart();
+      setTimeout(function () { alert("成功刪除此筆訂單"); }, 1000);
+    }).catch(error => {
+      console.log(error);
+    })
+};
+
+//  刪除所有購物車資料
+const delAllCartBtn = document.querySelector('.delAllCartBtn');
+delAllCartBtn.addEventListener('click', delAllCart);
+function delAllCart() {
+  let url = `${baseUrl}/api/livejs/v1/customer/${api_path}/carts`;
+  axios.delete(url)
+    .then(response => {
+      console.log(response);
+      getCart();
+      setTimeout(function () { alert("成功刪除所有訂單"); }, 1000);
+    }).catch(error => {
+      console.log(error);
+    })
+};
+
 getProducts();
 getCart();
+
+// 商品篩選功能
+const productSelect = document.querySelector('.productSelect');
+productSelect.addEventListener('change', selectFilter);
+
+function selectFilter(e) {
+  e.preventDefault();
+  let category = e.target.value;
+  if (category === '全部') {
+    renderProduct(productData);
+    return;
+  }
+  let targetProducts = [];
+  productData.forEach(item => {
+    if (item.category === category) {
+      targetProducts.push(item);
+    };
+  });
+  renderProduct(targetProducts);
+}
+
+// 篩選 select 欄位教學
+const getCategories = () => {
+  // 步驟二: 分類前
+  let unSort = productData.map(item => {
+    return item.category
+  });
+  console.log(unSort);  // 結果為 ["床架","床架","窗簾","床架","收納","床架","收納","床架"]
+  //  步驟三: 分類後
+  let sorted = unSort.filter((item, i) => {
+    return unSort.indexOf(item) === i;
+  });
+  console.log(sorted);  // 結果為 ["床架","窗簾","收納"]
+  // 步驟四: 渲染至網頁上
+  renderCategories(sorted);
+};
+
+const renderCategories = (sorted) => {
+  let str = '<option value="全部" selected>全部</option>';
+  sorted.forEach(item => {
+    str += `<option value="${item}">${item}</option>`
+  });
+  productSelect.innerHTML = str;
+};
 
 //  送出訂單
 const addOrder = () => {
